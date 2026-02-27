@@ -1,6 +1,6 @@
 LOGFILE="log_$(date +'%Y%m%d_%H%M%S').txt"
 touch $LOGFILE
-NPROC=$(nproc)
+NPROC=4
 OUTDIR=rmgpy_output
 
 cases=(diesel octane heptane)
