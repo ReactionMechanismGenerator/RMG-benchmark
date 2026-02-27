@@ -5,6 +5,10 @@ temp
 RMG-Py
 RMG-database
 
+# run results
+log_*.txt
+rmgpy_output_*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
