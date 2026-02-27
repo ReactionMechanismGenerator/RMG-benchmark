@@ -12,7 +12,7 @@ These are the three versions which I have set up, each of which has its own subd
 
  - `2.4.1`: last Python 2 release, uses Python 2.7 ([commit is here on GitHub](https://github.com/ReactionMechanismGenerator/RMG-Py/tree/af0ef48bda472c4689605015ac0adda102425aae))
  - `3.0.0`: first Python 3 release, uses Python 3.7 ([commit is here on GitHub](https://github.com/ReactionMechanismGenerator/RMG-Py/tree/756c968b5a053f794a5a33dd9a292f602cb1e83a))
- - `3.3.0`: version described in the RMG-Py 3.3 manuscript; supports Python 3.9 through 3.11, this setup uses 3.11 ([commit is here on GitHub](https://github.com/ReactionMechanismGenerator/RMG-Py/tree/7c363ca7ab6cd50e0f9e7651117090c5192d43c5))
+ - `3.3.x`: version described in the RMG-Py 3.3 manuscript; supports Python 3.9 through 3.11, this setup uses 3.11 (_todo_: release this version of RMG-Py and include it here)
 
 To actually run the install, just navigate to the corresponding subdirectory and run `install.sh`.
 
