@@ -2,6 +2,10 @@
 
 Benchmarks for the RMG v3.3 paper, comparing it against historical versions of RMG.
 
+TODO: it appears that the CoW behavior of Python 2.7 and 3.7 has been reduced/eliminated in Python 3.11, meaning that rmg 3.3.x could, when adding support for 3.11, drop the check of `.free` memory and multiprocess exactly how the user requested without memory growing unbounded (check the corresponding docs about this, may also need to test Python 3.9 and 3.10)
+
+TODO: choice of benchmarks is currently ch3no2 (diverse atomtypes), octane (solvated), c3h4 (classic combustion)
+
 ## Installing
 
 I have provided working installation files for Linux.
