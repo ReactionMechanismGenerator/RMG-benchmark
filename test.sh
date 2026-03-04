@@ -6,7 +6,7 @@ touch "$LOGFILE"
 TOTAL_MEM_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
 echo "Machine Total Memory (MiB): $((TOTAL_MEM_KB / 1024))" >> $LOGFILE
 
-cases=(ch3no2 octane c3h4)
+cases=(teos ch3no2 octane)
 
 nprocs=(1 2 4 8)
 

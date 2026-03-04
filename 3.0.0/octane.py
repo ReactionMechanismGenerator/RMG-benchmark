@@ -57,5 +57,5 @@ options(
     saveRestartPeriod=None,
     generateOutputHTML=False,
     generatePlots=False,
-    saveSimulationProfiles=True,
+    saveSimulationProfiles=False,
 )
