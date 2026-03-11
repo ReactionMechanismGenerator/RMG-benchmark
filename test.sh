@@ -9,7 +9,7 @@ echo "version,case,processes,execution_time_s,execution_time_mmss,peak_rss_mib,m
 
 TOTAL_MEM_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
 
-cases=(propane ch3no2 octane)
+cases=(heptane diesel propane octane)
 nprocs=(1 2 4 8)
 envs=("rmg_241_env" "rmg_300_env" "rmg_3.3.0+c2d1cee_env")
 dirs=("2.4.1" "3.0.0" "3.3.0+c2d1cee")
@@ -23,18 +23,31 @@ for v in "${!envs[@]}"; do
             subdir="${OUTDIR}/${dirs[$v]}/${case}_${np}proc"
             mkdir -p "$subdir"
 
-            start_time=$(date +%s)
-
             python "${dirs[$v]}/RMG-Py/rmg.py" \
                 --maxproc "$np" \
                 --output-directory "$subdir" \
                 "${dirs[$v]}/${case}.py" &
             PY_PID=$!
 
+            # Initialize timing and memory tracking
+            start_time=$(date +%s)
             max_total_kb=0
             min_available_kb=$TOTAL_MEM_KB
+            TIMEOUT_SECONDS=3600  # 1 hour limit
 
             while ps -p $PY_PID > /dev/null; do
+                current_time=$(date +%s)
+                elapsed=$((current_time - start_time))
+
+                # Check if execution has exceeded 1 hour
+                if [ "$elapsed" -ge "$TIMEOUT_SECONDS" ]; then
+                    echo "Timeout reached (1 hour). Terminating process $PY_PID..."
+                    # Kill the process and all its children
+                    pkill -P $PY_PID
+                    kill $PY_PID
+                    break
+                fi
+
                 current_total_kb=$(ps -o rss= --pid $PY_PID $(pgrep -P $PY_PID) 2>/dev/null | \
                                 awk '{sum+=$1} END {print sum+0}')
 
