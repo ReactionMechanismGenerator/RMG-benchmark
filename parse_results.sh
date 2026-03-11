@@ -14,9 +14,9 @@ find . -type f -name "RMG.log" | while read -r logfile; do
     awk -v version="$version" \
         -v benchmark="$benchmark" \
         -v nproc="$nproc" '
-    /After model enlargement:/ {
-        iter++
 
+    # capture most recent enlargement numbers
+    /After model enlargement:/ {
         getline
         match($0, /has ([0-9]+) species and ([0-9]+) reactions/, a)
         core_species=a[1]
@@ -33,16 +33,20 @@ find . -type f -name "RMG.log" | while read -r logfile; do
         exec_time=a[1]
     }
 
+    # this marks the end of an iteration
     /Memory used:/ {
         match($0, /([0-9]+\.[0-9]+)/, a)
         mem=a[1]
 
-        printf "%s,%s,%s,%d,%s,%s,%s,%s,%s,%s\n",
-            version, benchmark, nproc, iter,
-            core_species, core_rxns,
-            edge_species, edge_rxns,
+        iter++
+
+        printf "%s,%s,%s,%d,%s,%s,%s,%s,%s,%s\n", \
+            version, benchmark, nproc, iter, \
+            core_species, core_rxns, \
+            edge_species, edge_rxns, \
             exec_time, mem
     }
+
     ' "$logfile" >> "$OUTFILE"
 
 done
