@@ -1,18 +1,6 @@
 # RMG-benchmark
 
-| Version | diesel | diesel | diesel | diesel | heptane | heptane | heptane | heptane | octane | octane | octane | octane | propane | propane | propane | propane |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-|  | Throughput | Memory | Peak RSS | Peak RAM Pressure | Throughput | Memory | Peak RSS | Peak RAM Pressure | Throughput | Memory | Peak RSS | Peak RAM Pressure | Throughput | Memory | Peak RSS | Peak RAM Pressure |
-| 2.4.1 | 1.04 | 1512.2 | 1703 | 3956 | 2.26 | 720.2 | 713 | 7327 | 5.50 | 779.0 | 797 | 3021 | 10.53 | 749.4 | 752 | 26665 |
-| 3.0.0 | 1.48 | 1537.0 | 2225 | 4449 | 3.58 | 717.0 | 688 | 2877 | 6.72 | 781.8 | 793 | 2979 | 14.25 | 757.6 | 749 | 2937 |
-| 3.3.0+c2d1cee | 1.78 | 1810.6 | 2141 | 4372 | 4.10 | 868.8 | 834 | 3019 | 7.10 | 949.0 | 968 | 3168 | 16.33 | 917.1 | 916 | 3135 |
-
-
 Benchmarks for the RMG v3.3 paper, comparing it against historical versions of RMG.
-
-TODO: it appears that the CoW behavior of Python 2.7 and 3.7 has been reduced/eliminated in Python 3.11, meaning that rmg 3.3.x could, when adding support for 3.11, drop the check of `.free` memory and multiprocess exactly how the user requested without memory growing unbounded (check the corresponding docs about this, may also need to test Python 3.9 and 3.10)
-
-TODO: choice of benchmarks is currently ch3no2 (diverse atomtypes), octane (solvated), c3h4 (classic combustion)
 
 ## Installing
 
@@ -32,3 +20,7 @@ To actually run the install, just navigate to the corresponding subdirectory and
 
 Within each version's subdirectory, there is a `test.sh` script that executes the tests, writing the results to both the terminal and a timestamped log file.
 It will auto-magically run on all available CPUs.
+
+## Results
+
+Detailed results can be seen in `results.ipynb`, and summary results are generated using `summary_stats.py`.
