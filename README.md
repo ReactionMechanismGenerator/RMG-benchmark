@@ -20,3 +20,7 @@ To actually run the install, just navigate to the corresponding subdirectory and
 
 Within each version's subdirectory, there is a `test.sh` script that executes the tests, writing the results to both the terminal and a timestamped log file.
 It will auto-magically run on all available CPUs.
+
+## Results
+
+Detailed results can be seen in `results.ipynb`, and summary results are generated using `summary_stats.py`.
