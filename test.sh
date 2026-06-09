@@ -11,8 +11,8 @@ TOTAL_MEM_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
 
 cases=(heptane diesel propane octane)
 nprocs=(1 2 4 8)
-envs=("rmg_241_env" "rmg_300_env" "rmg_3.3.0+c2d1cee_env")
-dirs=("2.4.1" "3.0.0" "3.3.0+c2d1cee")
+envs=("rmg_241_env" "rmg_300_env" "rmg_400_env")
+dirs=("2.4.1" "3.0.0" "4.0.0")
 
 for v in "${!envs[@]}"; do
     mkdir -p "${OUTDIR}/${dirs[$v]}"

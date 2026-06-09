@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Define the target date (YYYY-MM-DD format)
-CUTOFF_DATE="2019-07-23"
+CUTOFF_DATE="2026-06-08"
 
 # Define your target channels and packages here
-CHANNELS=("defaults" "rmg" "rdkit" "cantera" "anaconda")
-PACKAGES=("cairo" "cairocffi" "cantera >=2.3.0" "coolprop" "coverage" "cython >=0.25.2" "dde" "ffmpeg" "gprof2dot" "graphviz" "jinja2" "jupyter" "lpsolve55" "markupsafe" "matplotlib >=1.5" "mock" "mopac" "mpmath" "muq" "networkx" "nose" "numpy >=1.10.0" "openbabel" "psutil" "pydas >=1.0.1" "pydot ==1.2.2" "pydot-ng" "pydqed >=1.0.0" "pygpu" "pymongo" "pyparsing" "pyrdl" "pyyaml" "quantities" "rdkit >=2018" "scikit-learn" "scipy" "symmetry" "textgenrnn" "xlwt")
+CHANNELS=("rmg" "conda-forge")
+PACKAGES=("cairo" "cairocffi" "ffmpeg >= 7" "xlrd" "xlwt" "h5py >=3.10" "graphviz >=12" "markupsafe" "psutil" "ncurses" "suitesparse" "pyopenssl >24" "coolprop" "cantera >=3.0" "mopac" "cclib >=1.6.3,<1.9" "openbabel >= 3" "rdkit >=2024" "pysidt-rmg >=1.2" "setuptools >=70,<80" "coverage" "cython >=3.0,<3.1" "scikit-learn >=1.3" "scipy >=1.13" "numpy >=1.24,<2" "pydot" "jinja2" "jupyter" "pip" "pymongo" "pyparsing" "pyyaml" "networkx" "pytest" "pytest-cov" "pytest-check" "pyutilib" "matplotlib >=3.5" "mpmath" "pandas >=2" "gprof2dot" "numdifftools" "quantities !=0.16.0,!=0.16.1" "pydas >=1.0.3" "pydqed >=1.0.3" "symmetry")
 
 echo "Searching for latest package versions as of $CUTOFF_DATE..."
 echo "---------------------------------------------------------------------------------"

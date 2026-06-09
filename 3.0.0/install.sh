@@ -13,6 +13,7 @@ cd ..
 
 conda env create -f env.yml
 conda activate rmg_300_env
+conda env export > env_linux_locked.yml
 
 cd RMG-Py
 make

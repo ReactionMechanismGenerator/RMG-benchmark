@@ -1,6 +1,6 @@
 git clone git@github.com:ReactionMechanismGenerator/RMG-Py.git
 cd RMG-Py
-git checkout c2d1cee02c4298312edd0d01c18125fa1735d865
+git checkout 643259b56e75c91107caef674aab35761bd9a03d
 cd ..
 
 # patch out the automatic multiprocessing code which doesn't work on our particular hardware
@@ -8,11 +8,12 @@ sed -i 's/psutil\.virtual_memory().free/psutil.virtual_memory().available/' RMG-
 
 git clone git@github.com:ReactionMechanismGenerator/RMG-database.git
 cd RMG-database
-git checkout 6bbe93aa278b21e18770f23dd57d23d37c94fbe2
+git checkout 0c2e564d4414a6dba92d2a08abb69e3d1ed10494
 cd ..
 
 conda env create -f env.yml
-conda activate rmg_3.3.0+c2d1cee_env
+conda activate rmg_400_env
+conda env export > env_linux_locked.yml
 
 cd RMG-Py
 make
