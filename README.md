@@ -16,6 +16,8 @@ These are the three versions which I have set up, each of which has its own subd
 
 To actually run the install, just navigate to the corresponding subdirectory and run `install.sh`.
 
+To run the plotting code, you need a Python environment (e.g., `rmgb`) with `ipykernel pandas matplotlib`.
+
 ## Running
 
 Within each version's subdirectory, there is a `test.sh` script that executes the tests, writing the results to both the terminal and a timestamped log file.
