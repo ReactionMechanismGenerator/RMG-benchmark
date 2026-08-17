@@ -2,7 +2,7 @@
 
 OUTFILE="benchmark_summary.csv"
 
-# Added "run" to the header
+# Write CSV header
 echo "version,benchmark,nproc,run,iteration,core_species,core_reactions,edge_species,edge_reactions,exec_time_dd_hh_mm_ss,memory_mb" > "$OUTFILE"
 
 find . -type f -name "RMG.log" | while read -r logfile; do
@@ -19,36 +19,35 @@ find . -type f -name "RMG.log" | while read -r logfile; do
         -v nproc="$nproc" \
         -v run="$run" '
 
-    # capture most recent enlargement numbers
+    # capture most recent enlargement numbers using standard field iterations
     /After model enlargement:/ {
         getline
-        match($0, /has ([0-9]+) species and ([0-9]+) reactions/, a)
-        core_species=a[1]
-        core_rxns=a[2]
+        for(i=1; i<=NF; i++) {
+            if ($i == "species") core_species = $(i-1)
+            if ($i == "reactions") core_rxns = $(i-1)
+        }
 
         getline
-        match($0, /has ([0-9]+) species and ([0-9]+) reactions/, a)
-        edge_species=a[1]
-        edge_rxns=a[2]
+        for(i=1; i<=NF; i++) {
+            if ($i == "species") edge_species = $(i-1)
+            if ($i == "reactions") edge_rxns = $(i-1)
+        }
     }
 
     /Execution time/ {
-        match($0, /([0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2})/, a)
-        exec_time=a[1]
+        # Using [0-9][0-9] to avoid older awk strict POSIX interval limitations
+        match($0, /[0-9][0-9]:[0-9][0-9]:[0-9][0-9]:[0-9][0-9]/)
+        if (RSTART > 0) exec_time = substr($0, RSTART, RLENGTH)
     }
 
     # this marks the end of an iteration
     /Memory used:/ {
-        match($0, /([0-9]+\.[0-9]+)/, a)
-        mem=a[1]
+        match($0, /[0-9]+\.[0-9]+/)
+        if (RSTART > 0) mem = substr($0, RSTART, RLENGTH)
 
         iter++
 
-        printf "%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s\n", \
-            version, benchmark, nproc, run, iter, \
-            core_species, core_rxns, \
-            edge_species, edge_rxns, \
-            exec_time, mem
+        printf "%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s\n", version, benchmark, nproc, run, iter, core_species, core_rxns, edge_species, edge_rxns, exec_time, mem
     }
 
     ' "$logfile" >> "$OUTFILE"
